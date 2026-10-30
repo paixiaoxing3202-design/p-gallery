@@ -236,7 +236,7 @@ dialog::backdrop{background:#000c}
     <button id="theme-toggle" type="button" class="icon-button theme-button" aria-label="切换到深色" title="切换到深色"><svg class="moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="sun" aria-hidden="true"><use href="#i-sun"/></svg></button>
   </header>
   <div class="toolbar">
-    <label class="search-wrap"><svg aria-hidden="true"><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索 P值或情绪板" aria-label="搜索P值或情绪板" autocomplete="off"></label>
+    <label class="search-wrap"><svg aria-hidden="true"><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索 P值、大类或描述" aria-label="搜索P值、大类、情绪板或风格描述" title="支持P值、风格大类、情绪板名称及完整风格描述" autocomplete="off"></label>
     <details class="category-details" id="category-details"><summary><span id="category-label">全部风格</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></summary><div id="category-menu" class="category-menu" role="group" aria-label="按风格大类筛选，可多选"></div></details>
     <label class="sr-only" for="source-filter">按来源筛选</label><select id="source-filter"><option value="">全部来源</option><option value="mine">个人</option><option value="collected">网络</option><option value="unclassified">来源待确认</option></select>
     <label class="sr-only" for="status-filter">按完整度筛选</label><select id="status-filter"><option value="">全部完整度</option><option value="complete">有P值和预览图</option><option value="pending">待补</option></select>
@@ -265,7 +265,7 @@ dialog::backdrop{background:#000c}
         </aside>
       </div>
     </section>
-    <section class="empty" id="empty" hidden><h2>没有找到匹配的风格</h2><p>试试减少筛选条件，或更换P值、情绪板名称。</p><button class="copy" type="button" id="empty-reset">重置筛选</button></section>
+    <section class="empty" id="empty" hidden><h2>没有找到匹配的风格</h2><p>试试减少筛选条件，或更换P值、大类及描述关键词。</p><button class="copy" type="button" id="empty-reset">重置筛选</button></section>
   </main>
   <footer class="library-footer"><p id="library-note"></p><p>情绪板参考与生成效果分别标注</p></footer>
 </div>
@@ -402,7 +402,7 @@ function renderGallery(){
 }
 function render(){
   const query=search.value.trim().toLowerCase();
-  filtered=entries.filter(p=>(!selectedCategories.size||selectedCategories.has(categoryOf(p)))&&(!sourceFilter.value||p.source===sourceFilter.value)&&(!statusFilter.value||isComplete(p)===(statusFilter.value==='complete'))&&(p.command+' '+(p.moodboard||'')).toLowerCase().includes(query));
+  filtered=entries.filter(p=>(!selectedCategories.size||selectedCategories.has(categoryOf(p)))&&(!sourceFilter.value||p.source===sourceFilter.value)&&(!statusFilter.value||isComplete(p)===(statusFilter.value==='complete'))&&[p.command,p.moodboard,categoryOf(p),p.styleEffect].join(' ').toLowerCase().includes(query));
   filtered.sort((a,b)=>({starred:0,complete:1,pending:2}[bucketOf(a)]-{starred:0,complete:1,pending:2}[bucketOf(b)])||(['mine','collected','unclassified'].indexOf(a.source)-['mine','collected','unclassified'].indexOf(b.source))||Number(b.kind==='combination')-Number(a.kind==='combination'));
   $('count').textContent=filtered.length+' / '+entries.length+' 组';
   $('category-label').textContent=selectedCategories.size?selectedCategories.size===1?[...selectedCategories][0]:'已选 '+selectedCategories.size+' 类':'全部风格';
