@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>P值图库 · Midjourney 风格收藏</title>
+<script>
+try{document.documentElement.dataset.theme=localStorage.getItem('mj-p-gallery-theme-v1')==='dark'?'dark':'light'}catch{document.documentElement.dataset.theme='light'}
+try{document.documentElement.dataset.density=localStorage.getItem('mj-p-gallery-density-v1')==='comfortable'?'comfortable':'compact'}catch{document.documentElement.dataset.density='compact'}
+</script>
+<style>
+:root{color-scheme:light;--page:#fff;--ground:#f0f3f3;--ink:#161616;--muted:#5d6668;--edge:#d3d9da;--soft:#e8eded;--photo:#e9eded;--action:#161616;--action-ink:#fff;--gold:#946611;--gutter:32px;--gap:16px;font:14px/1.5 "Microsoft YaHei","Segoe UI",sans-serif}
+:root[data-theme="dark"]{color-scheme:dark;--page:#000;--ground:#111;--ink:#f4f4f4;--muted:#b4b4b4;--edge:#333;--soft:#222;--photo:#151515;--action:#f4f4f4;--action-ink:#000;--gold:#e5bc54}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;min-width:1000px;background:var(--page);color:var(--ink)}
+body[data-view="gallery"]{background:#f5f6f7}
+:root[data-theme="dark"] body[data-view="gallery"]{background:#000}
+button,input,select,textarea{font:inherit;color:inherit}
+button,summary,select{cursor:pointer}
+button{min-width:0;transition:background-color .12s ease,color .12s ease}
+button:disabled{cursor:default;color:var(--muted);opacity:.65}
+button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+button:active:not(:disabled){transform:translateY(1px)}
+button:disabled:hover{background:transparent;color:var(--muted)}
+svg{width:18px;height:18px;display:block;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+code{font-family:Consolas,"Cascadia Mono",monospace;font-weight:400;overflow-wrap:anywhere}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.shell{max-width:1824px;margin:auto;padding:28px var(--gutter) 56px}
+.masthead{display:flex;gap:28px;align-items:center}
+.brand h1{margin:0;font-size:30px;line-height:1.2;letter-spacing:-.05em;font-weight:600}
+.brand p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.test-tools{margin-left:auto;display:flex;align-items:center;gap:4px}
+.test-label{color:var(--muted);font-size:12px;margin-right:10px}
+.text-button{border:0;background:transparent;padding:7px 9px;font-size:12px;border-radius:4px;white-space:nowrap}
+.text-button:hover{background:var(--soft)}
+.icon-button{display:grid;place-items:center;width:34px;height:34px;padding:0;flex:none;border:1px solid var(--edge);border-radius:5px;background:transparent}
+.icon-button:hover{background:var(--soft)}
+.theme-button .sun{display:none}
+:root[data-theme="dark"] .theme-button .sun{display:block}
+:root[data-theme="dark"] .theme-button .moon{display:none}
+.prompt-details{position:relative;margin-left:5px}
+.prompt-details>summary{list-style:none}
+summary::-webkit-details-marker{display:none}
+.prompt-panel{position:absolute;right:0;top:40px;width:600px;z-index:5;padding:20px;background:var(--page);border:1px solid var(--edge);border-radius:5px;box-shadow:0 6px 20px #00000012;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.prompt-panel h2{font-size:13px;font-weight:500;margin:0 0 8px}
+.prompt-panel pre{font:13px/1.7 "Microsoft YaHei","Segoe UI",sans-serif;color:var(--muted);margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.prompt-panel .text-button{padding-left:0;margin-top:8px}
+.toolbar{display:flex;align-items:center;gap:10px;margin:24px 0 25px}
+.search-wrap{height:36px;display:flex;align-items:center;gap:10px;width:300px;min-width:180px;padding:0 11px;background:var(--ground);border-radius:4px}
+.search-wrap svg{width:16px;height:16px;color:var(--muted)}
+.search-wrap:focus-within{outline:2px solid var(--ink);outline-offset:2px}
+.search-wrap input{border:0;background:transparent;min-width:0;width:100%;font-size:13px;padding:0;outline:none}
+.search-wrap input:focus-visible{outline:0}
+.search-wrap input::placeholder{color:var(--muted)}
+.toolbar select,.category-details>summary{height:36px;border:1px solid var(--edge);background:var(--page);border-radius:4px;font-size:12px}
+.toolbar select{padding:5px 26px 5px 10px;max-width:175px}
+.category-details{position:relative;font-size:12px}
+.category-details>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;min-width:128px;padding:0 10px;list-style:none}
+.category-details>summary svg{width:13px;height:13px}
+.category-menu{position:absolute;z-index:5;top:43px;left:0;width:228px;background:var(--page);border:1px solid var(--edge);border-radius:5px;padding:8px;box-shadow:0 6px 20px #00000012}
+.category-menu label{display:flex;gap:10px;align-items:center;padding:8px 6px;font-size:13px;cursor:pointer}
+.category-menu label:hover{background:var(--soft)}
+.category-menu input{accent-color:var(--ink);margin:0}
+.category-menu .category-count{margin-left:auto;color:var(--muted);font-size:11px}
+.category-menu .text-button{width:100%;text-align:left;color:var(--muted)}
+.result-count{margin-left:auto;color:var(--muted);font-size:12px;white-space:nowrap}
+.reset-filter{padding-right:0;color:var(--muted)}
+.source-section+.source-section{margin-top:36px}
+.section-title{display:flex;align-items:baseline;gap:12px;margin:0 0 15px}
+.section-title h2{font-size:18px;letter-spacing:-.03em;font-weight:500;line-height:1.4;margin:0}
+.section-title>span{color:var(--muted);font-size:12px}
+/* Repeated scan lanes: five equal slots at 1440, six at 1920, four at 1024.
+   A combination is exactly two slots; media height is always one slot's width. */
+.gallery-grid{--columns:5;--cover-scale:.75;container-type:inline-size;display:grid;grid-template-columns:repeat(var(--columns),minmax(0,1fr));grid-auto-flow:row dense;gap:var(--gap);align-items:start}
+:root[data-density="comfortable"] .gallery-grid{--columns:4;--cover-scale:1}
+.style-card{grid-column:span 1;min-width:0;background:var(--page);border:1px solid var(--edge);border-radius:8px;overflow:hidden}
+:root[data-theme="dark"] .style-card{background:#111}
+.style-card[data-combo="true"]{grid-column:span 2}
+.card-info{padding:0 12px 10px}
+.card-media .photo-open,.card-media .no-image{height:calc(((100cqw - (var(--columns) - 1)*var(--gap))/var(--columns) - 2px)*var(--cover-scale))}
+.card-media .media-frames{gap:var(--gap)}
+.card-media .media-frame figcaption,.media-missing-caption{height:28px;min-height:28px;padding:7px 12px 0;font-size:11px;line-height:1.5;color:var(--muted);white-space:nowrap}
+.card-media .media-frame:last-child figcaption{padding-right:40px}
+.card-media .no-image strong{font-size:13px}
+.card-media .no-image span{font-size:11px}
+.card-media,.focus-media{position:relative;min-width:0}
+.media-frames{display:grid;grid-template-columns:repeat(var(--slots,1),minmax(0,1fr));gap:8px;min-width:0}
+.media-frame{min-width:0;margin:0}
+.photo-open{display:block;padding:0;border:0;border-radius:0;width:100%;height:clamp(240px,27vw,360px);background:var(--photo);position:relative;overflow:hidden}
+.photo-open img{display:block;width:100%;height:100%;object-fit:contain}
+.photo-open:focus-visible{outline-offset:-4px}
+.image-failure{position:absolute;inset:0;display:grid;place-items:center;padding:20px;color:var(--muted);font-size:12px}
+.media-frame figcaption{min-height:28px;padding-top:7px;color:var(--muted);font-size:11px}
+.media-arrow{position:absolute;top:calc((100% - 25px)/2);transform:translateY(-50%);border:0;border-radius:0;padding:0;width:30px;height:44px;display:grid;place-items:center;background:transparent;color:#fff}
+.media-arrow:active:not(:disabled){transform:translateY(-50%)}
+.media-arrow svg{width:23px;height:23px;stroke-width:1.6}
+.media-arrow .nav-outline{stroke:#000b;stroke-width:4.6}
+.media-arrow:hover{color:#fff;background:transparent}
+.media-arrow.prev{left:2px}
+.media-arrow.next{right:2px}
+.no-image{height:clamp(240px,27vw,360px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:9px;background:var(--ground);color:var(--muted)}
+.no-image strong{font-size:14px;font-weight:400}
+.no-image span{font-size:12px}
+.card-caption{position:relative;height:0}
+.card-caption>span{display:none}
+.card-caption .star{position:absolute;right:0;top:-28px}
+.star{display:grid;place-items:center;width:28px;height:28px;padding:0;flex:none;border:0;border-radius:4px;background:transparent;color:var(--muted)}
+.star svg{width:16px;height:16px;stroke-width:1.6}
+.star:hover{background:var(--soft);color:var(--ink)}
+.star[aria-pressed="true"]{color:var(--gold)}
+.star[aria-pressed="true"] svg{fill:currentColor}
+.command-row{display:flex;align-items:center;justify-content:space-between;gap:12px;height:36px}
+.card-code{font-size:16px;line-height:1.35;letter-spacing:-.025em;min-width:0}
+.pending-code{font-size:14px;color:var(--muted)}
+.copy{border:1px solid var(--edge);border-radius:4px;background:transparent;font-size:12px;padding:6px 10px;flex:none;white-space:nowrap}
+.copy:hover:not(:disabled){background:var(--action);border-color:var(--action);color:var(--action-ink)}
+.card-name{display:block;width:100%;height:24px;border:0;background:transparent;text-align:left;padding:0;margin:0;font-size:13px;font-weight:500;line-height:24px;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.card-name:hover{text-decoration:underline;text-underline-offset:3px}
+.card-record-count{min-width:0;font-size:11px;color:var(--muted);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card-extra{height:30px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card-extra .components{flex:none;margin:0;gap:5px}
+.card-extra .components .copy{border:0;padding:3px 4px;font-size:10px;color:var(--muted)}
+.card-extra .components .copy:hover{background:var(--soft);color:var(--ink)}
+.description{font-size:12px;color:var(--muted);margin-top:11px}
+.description>summary{list-style:none;padding:3px 0;width:fit-content}
+.description>summary::after{content:'＋';margin-left:7px}
+.description[open]>summary::after{content:'−'}
+.description p{font-size:13px;line-height:1.7;white-space:pre-line;margin:8px 0 0}
+.components{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.components:empty{display:none}
+.components .copy{font-size:12px}
+.empty{padding:48px 0 80px;color:var(--muted)}
+.empty h2{font-size:18px;font-weight:500;color:var(--ink)}
+.empty p{font-size:14px}
+.library-footer{display:flex;gap:16px;align-items:baseline;margin-top:45px;font-size:11px;color:var(--muted)}
+.library-footer p{margin:0}
+.bench-nav{display:flex;gap:18px;align-items:center;margin:0 0 19px}
+.back-button{display:flex;align-items:center;gap:8px;border:0;padding:7px 0;background:transparent;font-size:13px}
+.back-button svg{width:16px;height:16px}
+.bench-pager{display:flex;align-items:center;gap:12px;margin-left:auto;font-size:12px;color:var(--muted)}
+.bench-pager .text-button{color:var(--ink)}
+.bench-grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(310px,1fr);gap:28px;align-items:start}
+.focus{min-width:0}
+.focus-media .photo-open,.focus-media .no-image{height:clamp(330px,36vw,620px)}
+.focus-media .media-frames{gap:12px}
+.focus-caption{display:flex;gap:12px;align-items:center;min-height:40px;font-size:12px;color:var(--muted)}
+.focus-caption .media-count{margin-left:auto;font-size:11px}
+.thumbs{display:flex;gap:8px;overflow-x:auto;padding:4px 0 9px}
+.thumb{padding:4px;border:1px solid transparent;border-radius:3px;background:transparent;color:var(--muted);flex:none;font-size:10px}
+.thumb img{display:block;width:52px;height:64px;object-fit:contain;background:var(--photo);margin-bottom:5px}
+.thumb[aria-pressed="true"]{border-color:var(--ink);color:var(--ink)}
+.focus-info{min-width:0;padding:5px 0 0}
+.focus-category{font-size:13px;color:var(--muted);margin:0 0 9px}
+.focus-name{font-size:22px;font-weight:500;line-height:1.35;letter-spacing:-.035em;margin:0}
+.focus-code{display:block;font-size:28px;line-height:1.3;letter-spacing:-.035em;margin:22px 0 14px}
+.focus-code.pending-code{font-family:inherit;font-size:20px}
+.primary-copy{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:40px;border:0;border-radius:4px;padding:8px 12px;background:var(--action);color:var(--action-ink);font-size:13px}
+.primary-copy svg{width:16px;height:16px}
+.primary-copy:hover:not(:disabled){opacity:.87}
+.primary-copy:disabled,.primary-copy:disabled:hover{background:var(--soft);color:var(--muted)}
+.focus-description{font-size:14px;line-height:1.8;color:var(--muted);margin:22px 0 0;white-space:pre-line;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.focus-description.expanded{display:block;overflow:visible}
+.description-toggle{border:0;background:transparent;color:var(--muted);padding:6px 0 0;font-size:12px}
+.focus-note{font-size:12px;color:var(--muted);margin:15px 0}
+.choice-heading{display:flex;align-items:baseline;gap:10px;margin:24px 0 11px}
+.choice-heading h3{font-size:16px;font-weight:500;margin:0}
+.choice-heading span{font-size:11px;color:var(--muted)}
+.choice-row{display:grid;grid-template-columns:repeat(var(--choices,3),minmax(0,1fr));gap:10px}
+.choice{min-width:0}
+.choice-pick{display:block;text-align:left;width:100%;border:0;background:transparent;padding:0}
+.choice-pick img,.choice-placeholder{display:block;width:100%;height:92px;object-fit:contain;background:var(--photo)}
+.choice-name{display:block;font-size:12px;margin:8px 0 4px;line-height:1.5}
+.choice-code{display:block;font-size:12px;color:var(--muted)}
+.choice .copy{display:block;margin-top:8px;padding:4px 7px;font-size:11px}
+.choice-pick:hover .choice-name{text-decoration:underline;text-underline-offset:3px}
+dialog{background:var(--page);color:var(--ink);border:1px solid var(--edge);border-radius:6px}
+dialog::backdrop{background:#000c}
+.image-viewer{width:min(1400px,calc(100vw - 64px));max-height:calc(100vh - 48px);padding:16px}
+.viewer-header{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.viewer-header code{font-size:17px}
+.viewer-header .viewer-kind{font-size:12px;color:var(--muted);margin-right:auto}
+.viewer-stage{height:calc(100vh - 220px);min-height:280px;position:relative;background:var(--photo)}
+.viewer-stage>img{display:block;width:100%;height:100%;object-fit:contain}
+.viewer-stage>.media-arrow{top:50%}
+.viewer-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:15px}
+.viewer-position{font-size:12px;color:var(--muted)}
+.copy-dialog{width:600px;max-width:calc(100vw - 80px);padding:24px}
+.copy-dialog h2{margin:0 0 10px;font-size:18px;font-weight:500}
+.copy-dialog p{font-size:13px;color:var(--muted);margin:0 0 14px}
+.copy-dialog textarea{width:100%;display:block;resize:vertical;border:1px solid var(--edge);border-radius:4px;background:var(--ground);padding:12px;font:14px/1.7 Consolas,monospace}
+.copy-dialog .copy{margin-top:16px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,15px);background:var(--ink);color:var(--page);padding:10px 16px;border-radius:5px;font-size:13px;opacity:0;pointer-events:none;z-index:10;max-width:80vw}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:1700px){:root{--gutter:40px;--gap:20px}.photo-open,.no-image{height:390px}}
+@media(min-width:1700px){.gallery-grid{--columns:6}:root[data-density="comfortable"] .gallery-grid{--columns:5}}
+@media(max-width:1150px){:root{--gutter:24px;--gap:14px}.masthead{gap:18px}.test-tools{gap:0}.test-label{margin-right:4px}.prompt-details{margin-left:0}.text-button{padding-inline:7px}.toolbar{gap:8px}.search-wrap{width:250px}.result-count{font-size:11px}.bench-grid{gap:24px}.focus-name{font-size:20px}.focus-code{font-size:25px}.choice-pick img,.choice-placeholder{height:76px}}
+@media(max-width:1150px){.gallery-grid{--columns:4}:root[data-density="comfortable"] .gallery-grid{--columns:3}.toolbar .search-wrap{width:220px;min-width:170px}.toolbar select{max-width:155px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body data-view="gallery">
+<svg class="sr-only" aria-hidden="true"><defs>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4m0-14.2-1.4 1.4M6.3 17.7l-1.4 1.4"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.8 6.4.9-4.6 4.5 1.1 6.4L12 17.5l-5.7 3.1 1.1-6.4-4.6-4.5 6.4-.9Z"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><path d="m7 10 5 5 5-5"/></symbol>
+<symbol id="i-back" viewBox="0 0 24 24"><path d="m10 5-7 7 7 7m-7-7h18"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+</defs></svg>
+<div class="shell">
+  <header class="masthead">
+    <div class="brand"><h1>P值图库</h1><p>Midjourney 风格收藏</p></div>
+    <div class="test-tools" aria-label="测试提示词">
+      <span class="test-label">测试提示词</span>
+      <button type="button" class="text-button" data-prompt="test-prompt-1" aria-label="复制人物基础提示词">人物基础</button>
+      <button type="button" class="text-button" data-prompt="test-prompt-2" aria-label="复制人物全身提示词">人物全身</button>
+      <button type="button" class="text-button" data-prompt="test-prompt-3" aria-label="复制龙提示词">龙</button>
+      <button type="button" class="text-button" data-prompt="test-prompt-4" aria-label="复制长剑提示词">长剑</button>
+      <details class="prompt-details" id="prompt-details"><summary class="text-button">查看原文</summary>
+        <div class="prompt-panel">
+          <section><h2>人物基础</h2><pre id="test-prompt-1">一个人
+--ar 3:4 --stylize 200</pre><button type="button" class="text-button" data-prompt="test-prompt-1">复制原文</button></section>
+          <section><h2>人物全身</h2><pre id="test-prompt-2">身形修长匀称，自然站立，面向镜头，从头顶到双脚完整入画，五官清晰，人物接近占满画面高度。
+--ar 3:4 --stylize 200</pre><button type="button" class="text-button" data-prompt="test-prompt-2">复制原文</button></section>
+          <section><h2>龙</h2><pre id="test-prompt-3">龙
+--ar 3:4 --stylize 200</pre><button type="button" class="text-button" data-prompt="test-prompt-3">复制原文</button></section>
+          <section><h2>长剑</h2><pre id="test-prompt-4">一把长剑
+--ar 3:4 --stylize 200</pre><button type="button" class="text-button" data-prompt="test-prompt-4">复制原文</button></section>
+        </div>
+      </details>
+    </div>
+    <button id="theme-toggle" type="button" class="icon-button theme-button" aria-label="切换到深色" title="切换到深色"><svg class="moon" aria-hidden="true"><use href="#i-moon"/></svg><svg class="sun" aria-hidden="true"><use href="#i-sun"/></svg></button>
+  </header>
+  <div class="toolbar">
+    <label class="search-wrap"><svg aria-hidden="true"><use href="#i-search"/></svg><input id="search" type="search" placeholder="搜索 P值或情绪板" aria-label="搜索P值或情绪板" autocomplete="off"></label>
+    <details class="category-details" id="category-details"><summary><span id="category-label">全部风格</span><svg aria-hidden="true"><use href="#i-chevron"/></svg></summary><div id="category-menu" class="category-menu" role="group" aria-label="按风格大类筛选，可多选"></div></details>
+    <label class="sr-only" for="source-filter">按来源筛选</label><select id="source-filter"><option value="">全部来源</option><option value="mine">个人</option><option value="collected">网络</option><option value="unclassified">来源待确认</option></select>
+    <label class="sr-only" for="status-filter">按完整度筛选</label><select id="status-filter"><option value="">全部完整度</option><option value="complete">有P值和预览图</option><option value="pending">待补</option></select>
+    <label class="sr-only" for="density-select">浏览密度</label><select id="density-select" title="浏览密度"><option value="compact">紧凑</option><option value="comfortable">舒适</option></select>
+    <span class="result-count" id="count" role="status" aria-live="polite" aria-atomic="true"></span>
+    <button class="text-button reset-filter" id="reset-filters" type="button">重置</button>
+  </div>
+  <main>
+    <div id="gallery" aria-label="卡片画廊"><div id="grid"></div></div>
+    <section id="workbench" aria-label="选片工作台" hidden>
+      <nav class="bench-nav" aria-label="风格浏览"><button type="button" id="back-to-gallery" class="back-button"><svg aria-hidden="true"><use href="#i-back"/></svg>返回画廊</button><div class="bench-pager"><button class="text-button" id="previous-profile" type="button">上一组</button><span id="profile-position"></span><button class="text-button" id="next-profile" type="button">下一组</button></div></nav>
+      <div id="bench-content" class="bench-grid">
+        <div class="focus">
+          <div class="focus-media" id="focus-media"></div>
+          <div class="focus-caption"><span id="focus-source"></span><span id="focus-count" class="media-count"></span><button class="star" id="focus-star" type="button" aria-label="收藏当前风格" aria-pressed="false"><svg aria-hidden="true"><use href="#i-star"/></svg></button></div>
+          <div id="focus-thumbs" class="thumbs" aria-label="本组全部图片"></div>
+        </div>
+        <aside class="focus-info">
+          <p class="focus-category" id="focus-category"></p><h2 class="focus-name" id="focus-name" tabindex="-1"></h2>
+          <code class="focus-code" id="focus-code"></code>
+          <button class="primary-copy" id="focus-copy" type="button"><svg aria-hidden="true"><use href="#i-copy"/></svg><span>复制完整参数</span></button>
+          <div class="components" id="focus-components"></div>
+          <p class="focus-description" id="focus-description"></p><button type="button" class="description-toggle" id="description-toggle" aria-expanded="false" hidden>展开风格说明</button>
+          <p class="focus-note" id="focus-note"></p>
+          <div id="other-styles"><div class="choice-heading"><h3>其他风格</h3><span>当前筛选内</span></div><div id="choice-row" class="choice-row"></div></div>
+        </aside>
+      </div>
+    </section>
+    <section class="empty" id="empty" hidden><h2>没有找到匹配的风格</h2><p>试试减少筛选条件，或更换P值、情绪板名称。</p><button class="copy" type="button" id="empty-reset">重置筛选</button></section>
+  </main>
+  <footer class="library-footer"><p id="library-note"></p><p>情绪板参考与生成效果分别标注</p></footer>
+</div>
+<dialog id="viewer" class="image-viewer" aria-label="图片原尺寸预览">
+  <header class="viewer-header"><code id="viewer-code"></code><span id="viewer-kind" class="viewer-kind"></span><button type="button" id="viewer-copy" class="copy">复制参数</button><button type="button" id="viewer-close" class="icon-button" aria-label="关闭大图"><svg aria-hidden="true"><use href="#i-close"/></svg></button></header>
+  <div class="viewer-stage"><img id="full-image" alt=""><button class="media-arrow prev" type="button" id="viewer-prev" aria-label="上一张图片"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="nav-outline" d="m15 5-7 7 7 7"/><path d="m15 5-7 7 7 7"/></svg></button><button class="media-arrow next" type="button" id="viewer-next" aria-label="下一张图片"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="nav-outline" d="m9 5 7 7-7 7"/><path d="m9 5 7 7-7 7"/></svg></button></div>
+  <footer class="viewer-footer"><span class="viewer-position" id="viewer-position"></span><button type="button" class="text-button" id="viewer-retry">重新读取图片</button></footer>
+</dialog>
+<dialog id="copy-dialog" class="copy-dialog" aria-labelledby="copy-title"><h2 id="copy-title">复制完整内容</h2><p>浏览器未允许自动复制。内容已选中，按 Ctrl+C 复制。</p><textarea id="copy-text" readonly rows="4" aria-label="完整复制内容"></textarea><button id="copy-close" class="copy" type="button">完成</button></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<script id="profiles-data" type="application/json">[{"id":"13cfej1","command":"--profile 13cfej1","source":"collected","styleCategory":"","styleEffect":"","images":[]},{"id":"1nrgfn2","command":"--profile 1nrgfn2","source":"collected","styleCategory":"","styleEffect":"","images":[]},{"id":"4xp6s9w","command":"--profile 4xp6s9w","source":"collected","styleCategory":"","styleEffect":"","images":[]},{"id":"aa7zn39","command":"--profile aa7zn39","source":"collected","styleCategory":"写实仿真","styleEffect":"冷灰电影感的粗粝写实幻想，以灰蓝、黑白等低饱和配色为主。拟真肤质、细密发丝和粗织物质感突出，带磨损、颗粒与柔焦效果；侧光、逆光和深暗背景强化轮廓与情绪，整体冷峻克制，兼有 CG 造型感与幻想概念画气质。","images":["assets/0f8ae34263a586c839ac1adbd98d44f9a8da8265824fe092782c152de7200513.png","assets/39a4bf807fedde08d0d7d8249cabd8b1f157d99833395741e41e8d48d99c3104.png","assets/7d748f890aa1953f19a7089fc8dd854a2bebe3a20f7afb84776497e4f599e91f.png","assets/19d201f3440df81bad377796d39c217910daa86177ebe2dd1a3c22b6a0685821.png"]},{"id":"gln3a5w__o3f631s","command":"--profile gln3a5w o3f631s","source":"collected","styleCategory":"真人摄影","styleEffect":"清透柔和的人像摄影观感，灰蓝与青灰背景衬托自然肤色。柔和日光、细密发丝与可见肤面纹理并存，明暗过渡细腻，反差较克制；浅景深与轻微颗粒感突出面部，整体清新、安静，带自然光肖像与选角照气质。","images":["assets/c3eab4f50b33fd9d711844cd27e0531f341f803cd0024717c257ca2f87d75ea6.png","assets/5df1b977f3f722447a083c2b21ee11945565fe1ad41d1315b636e3ed9af9ec49.png"],"kind":"combination","components":["--profile gln3a5w","--profile o3f631s"]},{"id":"gxfs2uv","command":"--profile gxfs2uv","source":"collected","styleCategory":"3DCG","styleEffect":"华丽冷峻的幻想系 3DCG，人物面相偏二次元，材质刻画细密。黑色、银白与金色为主，点缀冷蓝发光；镜面金属、亮面皮革、细密发丝及鳞甲层次突出，配合强逆光和高反差光影，整体精致、锐利，带暗黑奇幻气质。","images":["assets/a1cc45d6e1984a06be873e6bf80b11bc4e77663fb347bb53fd374fc36a1a1d59.png","assets/ef5891b0e81ce6f788b873672f59467eddb5833547e2bb4051caac31c7f01b4f.png","assets/34ed7e91a34b10e1968566f1bf3e8c50fc2977ba043d0df82d1c9c462f5d43ae.png"]},{"id":"hke31nv","command":"--profile hke31nv","source":"collected","styleCategory":"","styleEffect":"","images":[]},{"id":"j43anr6","command":"--profile j43anr6","source":"collected","styleCategory":"3DCG","styleEffect":"精致幻想系 3DCG，融合二次元人物面相与写实材质。细密发丝、织物、鳞片及雕饰金属细节突出，柔和肤质与明亮镜面高光并存；常见冷暖对照、逆光轮廓和光晕，整体华丽、通透，带唯美奇幻气质。","images":["assets/a37a7a6b5f48db14f4f289f86da210f911560dc45cbd2510281f16493d28564d.png","assets/1b6c4a5620bf93207beebe038e9d8a0db8d71278afe2591f2d05574e65881329.png","assets/991a5874e9bb5cfe0ccda69dbb85a347fd789e329e989606113ef09200df614f.png","assets/d63a3dfe6d990e87350adc00c3965f84cc57e9d3f450f4ac42bcb9056bbfb6de.png"]},{"id":"mafkdmi","command":"--profile mafkdmi","source":"mine","styleCategory":"写实仿真","styleEffect":"柔和均匀的正面光、浅灰背景与自然肤色形成干净的写实角色肖像，细密发丝、细腻肤面和浅色织物纹理较清楚，面部塑形平滑，明暗过渡柔和，整体克制、清透。当前仅有1张人像样图，其他题材效果待补。","images":["assets/ca3de117ea94420127582ea7c0f9c521f76f99241ab7ae69a3d12afddc8f2788.png"],"referenceImages":["assets/188c35b572ff7bef7bdcf19ded35eab7ec3e833d1118c3a3481d366b8bfc2874.png"],"moodboard":"写实女主"},{"id":"ul9479q","command":"--profile ul9479q","source":"mine","styleCategory":"真人摄影","styleEffect":"近距离人像摄影观感，冷灰蓝背景衬托明亮肤色与深色发丝，前向闪光式照明形成清楚的肤面高光和背景投影；发丝、唇面与衣料纹理较清晰，整体清冷、利落，带时装肖像气质。当前仅有1张人像样图，其他题材效果待补。","images":["assets/6ef27c754f298adf57433c28f88accf0ae209fc1f545057c3c97f2b682ff3008.png"],"referenceImages":["assets/7d58c28103fcc566e566915d2f3d7ffe0d02ad8873df2fc32eb38e139fe35580.webp"],"moodboard":"高反差人像"},{"id":"uta38jf","command":"--profile uta38jf","source":"collected","styleCategory":"绘画感CG","styleEffect":"低明度蓝紫、青黑色的绘画感 CG，人物面部与身体以简化块面和夸张比例塑形，表面带斑驳涂绘与局部金属反光。深暗背景、冷色光和少量暖色轮廓形成强烈对照，整体阴郁、冷峻、雕塑感强，兼有暗黑科幻与怪诞幻想气质。","images":["assets/7bcbc57d505240d937366454aa4f01f0b0de80baee7915fc164b79f16ca29080.png","assets/32f708f303dff49bd7d681fc405166226606150a47d8d5fad4080f62244b7082.png","assets/5df2840260b1f7e145757802d2d0270549134630d75151f7cb264f32a2dbef55.png"]},{"id":"wfrdnal","command":"--profile wfrdnal","source":"mine","styleCategory":"中世纪","styleEffect":"华丽金属圣堂风格，黑金与银白形成强烈明暗对照。细密发丝、羽饰与暗色织物衬托雕花金属和尖锐冠饰，集中而锐利的高光突出镜面反射；整体华丽、冷峻，兼有圣堂礼仪感与暗黑奇幻气质。","images":["assets/0a7dada5979538e5450186512d85eab2ef7d262fb64a1323192ff879dfab77fe.png","assets/af50d48f9814feb2b4f73f27afdc9c8650db16f7f92beaabb7d8fe64fdf6897c.png","assets/ab0c25023c0029a02d4569468510b93248aaa963db13ff8063fea39078f7a2df.png"],"referenceImages":["assets/0e16d94f03aeda2357a40757d0cfb699353cc24db1f2049e0dccb9609b291efa.jpg"],"moodboard":"华丽金属圣堂"},{"id":"xcqdbg7","command":"--profile xcqdbg7","source":"collected","styleCategory":"绘画感CG","styleEffect":"低饱和灰青色的绘画感 CG，人像以硬朗面部块面、风格化比例和斑驳表面纹理塑形，冷色侧逆光、深暗背景与颗粒感突出。与《双城之战》的绘画化立体造型有相近倾向，但皮肤和材质更偏拟真，不能等同于该剧画风；整体冷峻、粗粝，带暗黑科幻与幻想气质。","images":["assets/a9d21e5715ab7628f4c9b5840be372ca5a0b5125f9b29db7c00616f55c078f64.png","assets/0514c0a459b409f54335fa57b32793181c2cd47a2a352cace61e2ffed8bbb90e.png","assets/a1e594748f0adca6b9ecafa5a336c8585bf53f3f1f499215c6ceea51dcdc76e3.png"]},{"id":"y3qpz16","command":"--profile y3qpz16","source":"collected","styleCategory":"","styleEffect":"","images":[]}]</script>
+<script id="drafts-data" type="application/json">[{"id":"CG仙侠（P值待提供）","command":"","source":"mine","moodboard":"CG仙侠","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。半写实仙侠人物、通透薄纱、晶亮羽饰与珠光金属高光，衣袖和发丝随风展开。蓝白薄纱、银白羽翼与红色羽甲作为同一CG画风内的服饰和配色变化，保留不同视线、手势与镜头距离。","images":[],"referenceImages":["assets/11f2ac102dfa2867964f1e40cb9aecb04bb00b29ce680c4030efc28070929e3b.webp"]},{"id":"CG圣兽（P值待提供）","command":"","source":"mine","moodboard":"CG圣兽","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。华丽仙侠CG圣兽、神兽、瑞兽、异兽、坐骑、宠物与兽形法相。包括龙、凤、狐、狮兽等兽形主体，参考毛羽鳞甲、晶体金属装饰、巨大体量与能量表现。","images":[],"referenceImages":["assets/3d0d71abd3d843b2e33d510fef51ea9353cf0f2296fc5c716e49d555c08b6e8e.png"]},{"id":"CG场景（P值待提供）","command":"","source":"mine","moodboard":"CG场景","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。华丽仙侠CG环境参考。以宫阙、建筑、山川、云海、洞窟及可辨识的空间布局为主；环境中附带光效的画面仍按主要取用对象归类。","images":[],"referenceImages":["assets/db518f9e7ce08606fd01bb3d604b5ea770d6988086ff415aacacc099d51eb8bf.png"]},{"id":"CG女主（P值待提供）","command":"","source":"mine","moodboard":"CG女主","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。华丽仙侠CG女性角色参考。以面部、发饰、服装、甲胄、姿态及角色多视图为主，保留人物主导的施法与能量光效画面。","images":[],"referenceImages":["assets/1a3d0761f16c2a60ec2869899de43bac72a2f9ed1affd43f7b7a3d241464da25.png"]},{"id":"CG法相（P值待提供）","command":"","source":"mine","moodboard":"CG法相","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。仙侠CG巨型人形法相、神将与化身参考。重点参考与地景、建筑或小人物的尺度关系，以及巨型轮廓、甲胄、兵器、能量和压迫感。","images":[],"referenceImages":["assets/f6ac5a2f698e63273a4f345683197f640080f481f8d2d3037442d09d4e3590dd.png"]},{"id":"CG特效（P值待提供）","command":"","source":"mine","moodboard":"CG特效","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。仙侠CG特效参考。以法阵、能量环、光束、冲击、旋涡、发光莲花与魔法眼部细节为主，参考形状、色彩、层次和能量运动感。","images":[],"referenceImages":["assets/d22a69d5e06ac12004b373f49ab2158a7f5d92fd301c95d849e203238a3306c2.png"]},{"id":"CG男主（P值待提供）","command":"","source":"mine","moodboard":"CG男主","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。华丽仙侠CG男性角色参考。以面部、发型、服装、甲胄、姿态及角色多视图为主，保留人物主导的持剑、施法与能量光效画面。","images":[],"referenceImages":["assets/e63abf549b8e0571171c01d05ec7b2b0af312832398adf5f3a7e6f1fc7767d81.png"]},{"id":"CG道具（P值待提供）","command":"","source":"mine","moodboard":"CG道具","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。华丽仙侠CG的兵器、法宝与器物。包括刀剑、长柄兵器、弓、链刃以及葫芦、宝塔、伞等，参考轮廓、结构、金属晶体材质与附着光效。","images":[],"referenceImages":["assets/3122b2ce5fcae439d37478cd488d2268e1d256f307f74291cf30f66502651dc2.png"]},{"id":"CG骸骨（P值待提供）","command":"","source":"mine","moodboard":"CG骸骨","styleCategory":"3DCG","styleEffect":"情绪板参考，效果待补。低饱和灰白、石化骨纹、龟裂细节和烟尘，以巨型残骸、近景骨架及前后叠合形成遗迹空间。","images":[],"referenceImages":["assets/521ada4b6680a30bb72cef553e02554ad96ff86f4bdc1aea5ba543f9a45d517b.webp"]},{"id":"云顶云宫（P值待提供）","command":"","source":"mine","moodboard":"云顶云宫","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。巨大宫墙、层叠檐线、古松与云海，以低饱和天光和微小人物组织尺度。极简宫墙、云上长廊与漂浮宫阙合为同一组，参考安静、开阔、庄严的东方仙境。","images":[],"referenceImages":["assets/9777164bb6fc490ab67c9e95a616c67cf5d148f9d03b11ae8ee56e6aa2c6231d.webp"]},{"id":"仿古设色勾线（P值待提供）","command":"","source":"mine","moodboard":"仿古设色勾线","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。细线勾勒配合青绿、朱红、赭金和仿古纸色，统一人物与瑞兽的装饰语言。","images":[],"referenceImages":["assets/f262bc63d5231de3dee06237a6775b51f2fc625e566394f834f28b93f6d66d58.webp"]},{"id":"写实国风（P值待提供）","command":"","source":"mine","moodboard":"写实国风","styleCategory":"写实仿真","styleEffect":"情绪板参考，效果待补。接近摄影观感的国风古装角色参考，以女性角色为主，包含人物特写与角色组合画面。参考发饰、服装、自然比例、镜头光线与景深。","images":[],"referenceImages":["assets/bc0cb319d137e790ac45d08a631305b981087d9b84d354a7618995fecba876fb.png"]},{"id":"写实场景（P值待提供）","command":"","source":"mine","moodboard":"写实场景","styleCategory":"写实仿真","styleEffect":"情绪板参考，效果待补。接近摄影观感的环境参考，包含城市夜景、住宅、办公室、会议室、走廊与地下空间。参考空间结构、材质、透视、镜头光线和生活质感。","images":[],"referenceImages":["assets/a5463551487c21d8fd63e70a624a1b45979132fb750316e4ae14d56f52cf07e9.png"]},{"id":"写实男主（P值待提供）","command":"","source":"mine","moodboard":"写实男主","styleCategory":"写实仿真","styleEffect":"情绪板参考，效果待补。接近摄影观感的男性角色与多视图参考。参考面部、发型、服装、自然比例、镜头光线和景深。","images":[],"referenceImages":["assets/3de35b5b2b034f846790d2d028cd8f052f4865ebc5a4dbd1108630d4f3751903.png"]},{"id":"写意厚笔武侠（P值待提供）","command":"","source":"mine","moodboard":"写意厚笔武侠","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。大色块铺陈、粗笔叠涂和破碎边缘，以衣袍、风雪、尘烟及动作笔势组织武侠人物和叙事空间。","images":[],"referenceImages":["assets/46f1a1d407a745576703551895fae79b08c1de9ec647458e7e4ad190073636a7.webp"]},{"id":"写意水墨留白（P值待提供）","command":"","source":"mine","moodboard":"写意水墨留白","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。墨块、飞白、破碎边缘与留白。保留人物、兽类和动作的笔势变化。","images":[],"referenceImages":["assets/34b1748c8b9487b8531deb0b7f7225402c40d07822426a669b12971d893d48c4.webp"]},{"id":"复古胶片（P值待提供）","command":"","source":"mine","moodboard":"复古胶片","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。褐绿、暖黄和青灰的综合色彩，配合颗粒、柔和反差、逆光与尘雾。用人物、牧场生活和开阔环境建立怀旧气氛。","images":[],"referenceImages":["assets/8bec6605d233ac108aaed883861f0563643021307cbc0df86466b452aab9b499.webp"]},{"id":"斑驳重彩壁画（P值待提供）","command":"","source":"mine","moodboard":"斑驳重彩壁画","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。以破碎色斑、厚重设色、纸面颗粒与密集纹饰组织画面。人物、花兽和环境共享可见覆盖笔触；区别于总库较平整的矿彩卷纹和金线装饰。","images":[],"referenceImages":["assets/b48cc1b3b719a752ca7ae315882621b715a5a0fdfbb4f68e9a5560f9a010a41b.webp"]},{"id":"暖金织锦古装人像（P值待提供）","command":"","source":"mine","moodboard":"暖金织锦古装人像","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。暖色侧逆光、浅景深、织锦纹样与前景遮挡；人物和衣料是画面重心，荒漠与回廊提供场景变化。","images":[],"referenceImages":["assets/40c66d5f222c50a44780b220100b19a185b16e2db01efd3bc05b4c5a44101c95.webp"]},{"id":"暗底细刻神魔（P值待提供）","command":"","source":"mine","moodboard":"暗底细刻神魔","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。密集刻线、甲胄与毛发细节塑造厚重神魔，低明度里保留古铜与暗红层次。","images":[],"referenceImages":["assets/528cde89bcd4e0a966b6860fd0fb23525c8b2de4c07ad4ec1e185ebef87127f8.webp"]},{"id":"暗底细描写实（P值待提供）","command":"","source":"mine","moodboard":"暗底细描写实","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。暗底中的细毛、羽片、鳞片和柔和体积。兼顾近景、全身与少量环境。","images":[],"referenceImages":["assets/2985af38cdad0d2ada974ecbda39af50807cad273ad1170e8348c778aa00ed08.webp"]},{"id":"暗金写实神话（P值待提供）","command":"","source":"mine","moodboard":"暗金写实神话","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。细腻肤面、连续体积和锐利金属反光，深黑与暖褐暗部中以金白高光塑造神话人物；盔甲、衣料和身体保留清楚的质感层次。","images":[],"referenceImages":["assets/b0485012cfed25c1d76c7a2aec463fbb4db425e961f3a1e419abd7ea004fe55f.webp"]},{"id":"暗金浮雕龙相（P值待提供）","command":"","source":"mine","moodboard":"暗金浮雕龙相","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。暗金龙形与旧墙般的斑驳、起伏和凹凸感结合，强调古老材质与压迫感。","images":[],"referenceImages":["assets/2a2f0a3d024fb8c9e9c2a2fffe51c89c234e449305a1e4456e7d82fa1e97a816.webp"]},{"id":"暗黑哥特旧化（P值待提供）","command":"","source":"mine","moodboard":"暗黑哥特旧化","styleCategory":"中世纪","styleEffect":"情绪板参考，效果待补。光影：整体亮度较低，冷灰局部反光勾勒黑铁与旧布。 结构：重甲、遮面头盔、披布围绕躯干组织，整体重心较沉。 材质：低饱和金属、粗粝或磨损表面、破旧布料的层叠。","images":[],"referenceImages":["assets/5bb0107d468a5fa7180242a3766d8599c3fc05dc545f69976867ae9954ebe13f.jpg"]},{"id":"暗黑金属密线刻绘（P值待提供）","command":"","source":"mine","moodboard":"暗黑金属密线刻绘","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。密集刻线、银亮甲片、深黑背景与清楚的金属边缘形成压迫感。以盔甲人物为主，保留嵌岩长剑补充同类画法下的道具与材质。","images":[],"referenceImages":["assets/39127708e960d1a69a11e906fe4b87c35cf004dcd9388a83c6a848b37bfa6ac6.webp"]},{"id":"朱砂金甲武神（P值待提供）","command":"","source":"mine","moodboard":"朱砂金甲武神","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。朱砂、古金、墨青与灰白云气相互映衬，勾线和甲纹细节配合扭转姿态、展开衣纹与持兵动作，形成武神画面的力量感。","images":[],"referenceImages":["assets/55f18cc17b048480c958075843f25100f54ec870c43f8d3fded100066e723f5d.jpg"]},{"id":"柔光体积暗绘（P值待提供）","command":"","source":"mine","moodboard":"柔光体积暗绘","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。柔和肤面、明暗渐层、低照度与雾光塑造神佛人像，金饰、兽形和云气围绕细致面部形成层次。","images":[],"referenceImages":["assets/44fb0c61368c15f4236f9f67a3b252dc74ddd73f0553094a6dbdc1c01cb8b09f.webp"]},{"id":"水墨写意武侠（P值待提供）","command":"","source":"mine","moodboard":"水墨写意武侠","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。黑白、灰白与少量青灰为主，以宽笔触、黑白色块、留白和长剑动线组织人物动作。","images":[],"referenceImages":["assets/829d295a63d2d315a1bae42cdc1347424f5ca5adf163ce222695ad1151f3f37b.jpg"]},{"id":"水墨厚绘神话（P值待提供）","command":"","source":"mine","moodboard":"水墨厚绘神话","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。大片明暗、飞散边缘、衣袍烟云与神话法相形成厚绘质感。","images":[],"referenceImages":["assets/db627801e8a23c924c422b99f61d2c63e15cf8056b00c64493a7241ceccd5153.webp"]},{"id":"浅底水彩块绘（P值待提供）","command":"","source":"mine","moodboard":"浅底水彩块绘","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。浅米色底上以较大的淡色块、清楚轮廓和概括甲片组织人物，接近现代块面插画。","images":[],"referenceImages":["assets/a736ab0ba2efd1e958e0e4090ca83992618bc17212b71ff4e291c1f0077dcf31.webp"]},{"id":"清丽细绘国风人物（P值待提供）","command":"","source":"mine","moodboard":"清丽细绘国风人物","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。五官、发丝、冠饰和服装轮廓更明确，皮肤较平滑，以细线与浅色层次形成清丽人物气质。","images":[],"referenceImages":["assets/c16537c86827bc4007cdd9146028fce154b45da75ea7dd9e4ee1bc40a6e68499.webp"]},{"id":"游戏CG场景（P值待提供）","command":"","source":"mine","moodboard":"游戏CG场景","styleCategory":"游戏CG","styleEffect":"情绪板参考，效果待补。游戏CG环境参考，包含庭院、山川、雪原、遗迹、城市、科幻空间及具有能量异象的环境。参考空间结构、构图、尺度、光线与气氛。","images":[],"referenceImages":["assets/e7afd3013c96dd16df7a2391266fe1d23a5a8f1c8c48e6c90f26604c1fe8bbbb.png"]},{"id":"游戏CG女主（P值待提供）","command":"","source":"mine","moodboard":"游戏CG女主","styleCategory":"游戏CG","styleEffect":"情绪板参考，效果待补。游戏CG女性角色参考，包含武侠、奇幻与科幻造型，参考面部、服装、甲胄、姿态、材质及角色多视图。","images":[],"referenceImages":["assets/9208844ea28931a050f57fb7e9d2b606e1511830b28afa77beb90d87ebc30cbc.png"]},{"id":"游戏CG怪物（P值待提供）","command":"","source":"mine","moodboard":"游戏CG怪物","styleCategory":"游戏CG","styleEffect":"情绪板参考，效果待补。游戏CG怪物参考，包含龙形异兽、岩石与骷髅巨物、兽形人身战士及魔物。以非人类或明显异化的主体为取用对象，参考体型、甲壳、骨骼、能量和压迫感。","images":[],"referenceImages":["assets/c3ca67629ba522271a23635c94982dc302dea635ed0a17b16e464631afe9686b.png"]},{"id":"游戏CG男主（P值待提供）","command":"","source":"mine","moodboard":"游戏CG男主","styleCategory":"游戏CG","styleEffect":"情绪板参考，效果待补。游戏CG男性角色与人形战士参考，包含武侠、奇幻、科幻及老者。参考面部、服装、甲胄、姿态、材质及角色多视图。","images":[],"referenceImages":["assets/ed00b424b573889c70f4a04b6aeab7f156b561f5ad19334a55baa15ba87e6e89.png"]},{"id":"游戏CG道具（P值待提供）","command":"","source":"mine","moodboard":"游戏CG道具","styleCategory":"游戏CG","styleEffect":"情绪板参考，效果待补。游戏CG道具参考，包含刀剑、法杖、扇子、经册、盾牌与机械装置等。以独立器物为主体，参考轮廓、结构、材质、刻纹与旧化。","images":[],"referenceImages":["assets/49b517774ed2b8079258fee6c6d66b819d8356d819d6a109dea3c83fb9dd0390.png"]},{"id":"电影感江湖（P值待提供）","command":"","source":"mine","moodboard":"电影感江湖","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。侧光、浅景深、前景遮挡、人物视线和动作透视建立电影镜头感；青灰与蓝黑基调中保留砂尘、红金锦衣和竹林湿冷环境的变化。","images":[],"referenceImages":["assets/cf8b5d375628bda9ff39a71efd5f778253b624daa28741dea211d039d1fb42a2.jpg"]},{"id":"白底书法粗笔（P值待提供）","command":"","source":"mine","moodboard":"白底书法粗笔","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。白纸留白、宽笔黑袍、竖排题字与少量朱红，构成统一的版面节奏。","images":[],"referenceImages":["assets/f5ca261e09cec4a59bddd38a73d5a198d20328f87c23ee39b6013bf46add4101.webp"]},{"id":"白衣水境与流动绸浪（P值待提供）","command":"","source":"mine","moodboard":"白衣水境与流动绸浪","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。冷蓝与青灰空间、白衣、水面倒影和大幅绸浪为主；肤面、衣料与水花保留清楚层次，远景留白和近景介质形成变化。","images":[],"referenceImages":["assets/51ef6475f9fa47c76cd00d67341311741a90d76bcab8df8ce9bd7126ec0eee71.webp"]},{"id":"矿彩神兽图腾（P值待提供）","command":"","source":"mine","moodboard":"矿彩神兽图腾","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。矿彩设色、勾线与卷云纹样统一兽形、人物和巨型法相；龙、羽鸟、长角与獠牙轮廓配合装饰纹样，形成神话图腾气质。","images":[],"referenceImages":["assets/1982f7e6ce40f3c77b4f2691485dd4cf3942a8aea8cd53ea01bc15223332f14f.jpg"]},{"id":"粗粝厚涂暗绘（P值待提供）","command":"","source":"mine","moodboard":"粗粝厚涂暗绘","styleCategory":"浓彩手绘","styleEffect":"情绪板参考，效果待补。成块明暗、覆盖笔触与粗粝表面。以冷灰、褐黑为基底，保留局部红金提亮。","images":[],"referenceImages":["assets/f3072e16662d86fa0c7fefdbee47a01906546b29713b40077a43eb4d35405d62.jpg"]},{"id":"红底黑白硬绘（P值待提供）","command":"","source":"mine","moodboard":"红底黑白硬绘","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。大片朱红负空间与黑白硬边人物，形成粗笔、高反差的冲撞感。","images":[],"referenceImages":["assets/7fdcf9203b43996de00a92a9d784fc1a5253c49fb3845b176a117116f05beddf.webp"]},{"id":"纸本碳笔刻画（P值待提供）","command":"","source":"mine","moodboard":"纸本碳笔刻画","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。干性排线、擦笔灰阶和纸面颗粒。以神话人物、异兽与动物刻画为主。","images":[],"referenceImages":["assets/c7719a43f359355afb47c56727c5fc248765fafeea63e8c4d9f570fc2963bb5e.jpg"]},{"id":"自然生物异化（P值待提供）","command":"","source":"mine","moodboard":"自然生物异化","styleCategory":"中世纪","styleEffect":"情绪板参考，效果待补。深暗底色中以分枝角形、骨刺、甲壳和有机生长纹理改变人物轮廓，冷紫与银色亮边勾勒硬质表面，整体幽暗、异化，兼有自然生物与奇幻装甲气质。","images":[],"referenceImages":["assets/4ffc557615c922f7b1193e0528e7ec2b74cf8864cf948c98b1e6ea793da30783.jpg"]},{"id":"花木浅景深情绪叙事（P值待提供）","command":"","source":"mine","moodboard":"花木浅景深情绪叙事","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。自然光、虚化花叶前景、肤面细节和人物关系构成情绪；粉花、红枫、麦田与花田是组内场景配色变化。","images":[],"referenceImages":["assets/b8285d0ed8ec84e4e1d0a16c773a8a1745a3b8962aab5e61d4884c949ab401e4.webp"]},{"id":"蓝黑神话风暴（P值待提供）","command":"","source":"mine","moodboard":"蓝黑神话风暴","styleCategory":"中世纪","styleEffect":"情绪板参考，效果待补。光影：深蓝或近黑底色，集中白光，雷电、浪尖与发丝形成细密亮线。 结构：古典神体与小型人物、白石建筑形成明显比例差；雷电竖线与浪花弧线组织力量方向。 材质：雕塑般的人体、白袍、金属和翻卷水体，保持清楚的亮暗与软硬对照。","images":[],"referenceImages":["assets/9a802393112d0cbb19a57cafc1b94bace0e5b69849bff661b9ae4f3086c7baf0.jpg"]},{"id":"装饰性黑白人物细绘（P值待提供）","command":"","source":"mine","moodboard":"装饰性黑白人物细绘","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。精细五官、流动发丝与花卉珠饰组成黑白人物细绘。近景、侧像、人物互动与环境叙事并存，保留装饰线条的疏密变化。","images":[],"referenceImages":["assets/731ae6764058fd4824338a85c55457b2d910e248f12edf0445b312e83586d926.webp"]},{"id":"西部牛仔（P值待提供）","command":"","source":"mine","moodboard":"西部牛仔","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。清晰的泥点、皮毛与衣料，较强明暗反差和可辨认的动作瞬间。用摔牛、骑乘、套索和转弯形成力量感。","images":[],"referenceImages":["assets/ad405d97990839f641535a37bd66f4668d6ddd674e84f7f7589a934f30577e40.webp"]},{"id":"钴蓝黑白骑士（P值待提供）","command":"","source":"mine","moodboard":"钴蓝黑白骑士","styleCategory":"中世纪","styleEffect":"情绪板参考，效果待补。核心是黑白硬反差、密集排线与刻线感、大片钴蓝和银白盔甲。适合先作为一套统一的骑士插画情绪板使用。","images":[],"referenceImages":["assets/b1efb117afc0a8938f26da0149ee8b6268fa05290b2c6c62f8003f266cda2c68.jpg"]},{"id":"银黑金属浮雕（P值待提供）","command":"","source":"mine","moodboard":"银黑金属浮雕","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。凸起装饰、凹槽阴影、硬边反光与金属厚度。银黑为主，保留少量暗金材质变化。","images":[],"referenceImages":["assets/39e0555ebde8fd829524152cd5298db209417c895abf869b014ef626a10a2084.webp"]},{"id":"黑底白刻飞白（P值待提供）","command":"","source":"mine","moodboard":"黑底白刻飞白","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。黑色负空间中用白色碎笔与飞白推出轮廓，少量红色引导视线。","images":[],"referenceImages":["assets/bb9c118380d83c68e9e6e3b19c5b97e7f6e3c5242c4dea6987b2e44557370fe4.webp"]},{"id":"黑底细线白描（P值待提供）","command":"","source":"mine","moodboard":"黑底细线白描","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。通过细轮廓、少量浅色填充与大片暗底勾形。金线、白描、蓝线保留为同类支线。","images":[],"referenceImages":["assets/dc42ed8c5f3663aea6f34fad7bdfa87bc185936037e07c8464f17186a4935547.webp"]},{"id":"黑底金丝刻线（P值待提供）","command":"","source":"mine","moodboard":"黑底金丝刻线","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。连续细线、纹样和金色面组织黑底图形，轮廓更完整，笔触较克制。","images":[],"referenceImages":["assets/83c1ef921ec65348f354f3064eeb655122350a5810e4b479c8862133e4ae8d10.webp"]},{"id":"黑白极简刀舞（P值待提供）","command":"","source":"mine","moodboard":"黑白极简刀舞","styleCategory":"真人摄影","styleEffect":"情绪板参考，效果待补。纯黑负空间、白衣亮刃与清楚的人脸/发丝；远景留白和近景刀光共享高反差黑白语言。","images":[],"referenceImages":["assets/c42e5c248e5a2d1824ba5449329e7caf32ee663c3fb5d10e004c8763285bcad7.webp"]},{"id":"黑金飞白刮绘（P值待提供）","command":"","source":"mine","moodboard":"黑金飞白刮绘","styleCategory":"水墨与黑白手绘","styleEffect":"情绪板参考，效果待补。金色干笔、刮擦和破碎边缘落在黑底，保留粗笔的方向与速度。","images":[],"referenceImages":["assets/9e7aa8618c389755868bdc42b5290fda9cbd51b7636921615332fd31a7263105.webp"]}]</script>
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const profiles=JSON.parse($('profiles-data').textContent),drafts=JSON.parse($('drafts-data').textContent),entries=[...profiles,...drafts];
+const SOURCE_NAMES={mine:'个人',collected:'网络',unclassified:'来源待确认'};
+const STAR_STORAGE_KEY='mj-p-gallery-starred-v1',THEME_STORAGE_KEY='mj-p-gallery-theme-v1';
+let starred=new Set();
+try{const saved=JSON.parse(localStorage.getItem(STAR_STORAGE_KEY)||'[]');if(Array.isArray(saved))starred=new Set(saved.filter(x=>typeof x==='string'))}catch{}
+const selectedCategories=new Set(),cardPages=new Map();
+let filtered=[],active=null,activeImage=0,viewerProfile=null,viewerIndex=0,returnScroll=0,returnKey='',toastTimer;
+const search=$('search'),sourceFilter=$('source-filter'),statusFilter=$('status-filter'),viewer=$('viewer');
+function element(tag,className,text){const node=document.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node}
+function icon(name){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg'),use=document.createElementNS('http://www.w3.org/2000/svg','use');svg.setAttribute('aria-hidden','true');use.setAttribute('href','#i-'+name);svg.appendChild(use);return svg}
+function button(className,text,callback,label){const node=element('button',className,text);node.type='button';if(label)node.setAttribute('aria-label',label);if(callback)node.addEventListener('click',callback);return node}
+function starKey(p){return p.moodboard?'moodboard:'+p.moodboard:'profile:'+p.id}
+function short(command){return command.replace(/^--(?:profile|p)[ \t]+/,'')}
+function nameOf(p){return p.moodboard||(p.kind==='combination'?'推荐组合':short(p.command)||p.id)}
+function categoryOf(p){return p.styleCategory.trim()||'待分类'}
+function mediaFor(p){return [...p.images.map((src,i)=>({src,kind:'效果图',position:i+1,total:p.images.length})),...(p.referenceImages||[]).map((src,i)=>({src,kind:'情绪板参考',position:i+1,total:p.referenceImages.length}))]}
+function isComplete(p){return Boolean(p.command&&mediaFor(p).length)}
+function bucketOf(p){return starred.has(starKey(p))?'starred':isComplete(p)?'complete':'pending'}
+function mediaLabel(m){return m.kind+' '+m.position+' / '+m.total}
+function mediaCount(p){const counts=[];if(p.kind==='combination')counts.push(p.components.length+' 个P值合用');if(p.images.length)counts.push(p.images.length+' 张效果图');if(p.referenceImages?.length)counts.push(p.referenceImages.length+' 张参考');return counts.join(' · ')||'效果图待补'}
+function notify(text){const t=$('toast');t.textContent=text;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),2200)}
+async function copyText(text,sourceButton,label='完整参数'){
+  if(!text)return;
+  let copied=false;
+  try{if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(text);copied=true}}catch{}
+  if(!copied){
+    const previous=document.activeElement,field=element('textarea');field.value=text;field.setAttribute('aria-label','复制内容');field.style.cssText='position:fixed;left:-9999px;top:0';
+    const host=viewer.open?viewer:document.body;host.appendChild(field);field.focus();field.select();
+    try{copied=document.execCommand('copy')}catch{}finally{field.remove();previous?.focus({preventScroll:true})}
+  }
+  if(copied){notify('已复制'+label);if(sourceButton){sourceButton.dataset.copied='true';setTimeout(()=>delete sourceButton.dataset.copied,1500)}}
+  else{const dialog=$('copy-dialog'),field=$('copy-text');field.value=text;if(!dialog.open)dialog.showModal();field.focus();field.select()}
+}
+function copyProfile(p,b){copyText(p.command,b,p.kind==='combination'?'完整组合参数':'完整参数')}
+function syncTheme(){const dark=document.documentElement.dataset.theme==='dark',b=$('theme-toggle');b.setAttribute('aria-label',dark?'切换到浅色':'切换到深色');b.title=b.getAttribute('aria-label')}
+$('theme-toggle').addEventListener('click',()=>{const theme=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=theme;syncTheme();try{localStorage.setItem(THEME_STORAGE_KEY,theme)}catch{notify('主题仅在本次浏览保留')}});
+function syncStar(b,p){const yes=starred.has(starKey(p));b.setAttribute('aria-pressed',String(yes));b.setAttribute('aria-label',(yes?'取消收藏 ':'收藏置顶 ')+nameOf(p));b.title=yes?'取消收藏':'收藏置顶'}
+function makeStar(p){const b=button('star',undefined,()=>toggleStar(p));b.dataset.key=starKey(p);b.appendChild(icon('star'));syncStar(b,p);return b}
+function toggleStar(p){
+  const key=starKey(p);starred.has(key)?starred.delete(key):starred.add(key);
+  let persisted=true;try{localStorage.setItem(STAR_STORAGE_KEY,JSON.stringify([...starred]))}catch{persisted=false}
+  renderGallery();
+  if(active){syncStar($('focus-star'),active)}
+  else{[...document.querySelectorAll('.style-card .star')].find(b=>b.dataset.key===key)?.focus({preventScroll:true})}
+  if(!persisted)notify('收藏仅在本次浏览保留');
+}
+function makeImage(src,alt,lazy=true){
+  const image=element('img');image.src=src;image.alt=alt;image.decoding='async';if(lazy)image.loading='lazy';
+  return image;
+}
+function loadablePhoto(media,label,callback,lazy=true){
+  const b=button('photo-open',undefined,()=>{if(b.dataset.failed){image.src=media.src}else callback()},label);
+  const image=makeImage(media.src,label,lazy);b.appendChild(image);
+  image.addEventListener('error',()=>{b.dataset.failed='true';image.hidden=true;if(!b.querySelector('.image-failure'))b.appendChild(element('span','image-failure','图片未能读取，点击重试'))});
+  image.addEventListener('load',()=>{delete b.dataset.failed;image.hidden=false;b.querySelector('.image-failure')?.remove()});
+  return b;
+}
+function navArrow(amount,callback){
+  const b=button('media-arrow '+(amount<0?'prev':'next'),undefined,callback,amount<0?'上一页图片':'下一页图片');
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 24 24');svg.setAttribute('aria-hidden','true');
+  const shape=amount<0?'m15 5-7 7 7 7':'m9 5 7 7-7 7';
+  ['nav-outline',''].forEach(c=>{const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('d',shape);if(c)path.setAttribute('class',c);svg.appendChild(path)});
+  b.appendChild(svg);return b;
+}
+function renderMedia(host,p,focus=false){
+  host.replaceChildren();const all=mediaFor(p);
+  host.onkeydown=null;
+  if(!all.length){const empty=element('div','no-image');empty.append(element('strong','','效果图待补'),element('span','','参数已保留，可直接复制'));host.appendChild(empty);if(!focus)host.appendChild(element('div','media-missing-caption',SOURCE_NAMES[p.source]+' · 效果图待补'));return}
+  const slots=(focus?p.images.length>1:p.kind==='combination')?2:1;
+  let start=focus?activeImage:(cardPages.get(starKey(p))||0);start=Math.max(0,Math.min(start,all.length-1));
+  // A selected reference is shown on its own; effects stay together as a visual unit.
+  const shown=focus&&all[start].kind==='情绪板参考'?[start]:Array.from({length:Math.min(slots,all.length-start)},(_,i)=>start+i);
+  const frames=element('div','media-frames');frames.style.setProperty('--slots',shown.length);
+  shown.forEach(i=>{
+    const figure=element('figure','media-frame'),m=all[i];
+    figure.append(loadablePhoto(m,(focus?'放大 ':'查看 ')+nameOf(p)+' '+mediaLabel(m),()=>focus?openImage(p,i):openBench(p,i),!focus),element('figcaption','',(!focus&&i===shown[0]?SOURCE_NAMES[p.source]+' · ':'')+mediaLabel(m)));
+    frames.appendChild(figure);
+  });host.appendChild(frames);
+  if(all.length>slots){
+    const move=amount=>{
+      const pages=Math.ceil(all.length/slots),page=Math.floor(start/slots),next=((page+amount+pages)%pages)*slots;
+      if(focus){activeImage=next;renderFocusMedia()}else{cardPages.set(starKey(p),next);renderMedia(host,p)}
+    };
+    [-1,1].forEach(amount=>host.appendChild(navArrow(amount,()=>move(amount))));
+    host.onkeydown=event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();move(event.key==='ArrowLeft'?-1:1)}};
+  }
+}
+function addComponents(host,p){
+  host.replaceChildren();
+  (p.components||[]).forEach(command=>{
+    const b=button('copy',undefined,event=>copyText(command,event.currentTarget),'单独复制 '+command);b.appendChild(element('code','',short(command)));b.appendChild(document.createTextNode(' 复制'));host.appendChild(b);
+  });
+}
+function makeCard(p){
+  const card=element('article','style-card');card.dataset.key=starKey(p);card.dataset.id=p.id;card.dataset.source=p.source;
+  card.dataset.combo=String(p.kind==='combination');
+  const media=element('div','card-media');renderMedia(media,p);card.appendChild(media);
+  const info=element('div','card-info'),caption=element('div','card-caption');
+  caption.append(element('span','',SOURCE_NAMES[p.source]),makeStar(p));info.appendChild(caption);
+  const commandRow=element('div','command-row'),code=element(p.command?'code':'span',p.command?'card-code':'pending-code',p.command?short(p.command):'P值待提供');
+  const copy=button('copy',p.kind==='combination'?'一起复制':'复制',event=>copyProfile(p,event.currentTarget),p.command?'复制 '+p.command:'P值待提供');copy.disabled=!p.command;
+  commandRow.append(code,copy);info.appendChild(commandRow);
+  const title=button('card-name',categoryOf(p)+(p.moodboard?' · '+p.moodboard:p.kind==='combination'?' · 推荐组合':''),()=>openBench(p,cardPages.get(starKey(p))||0),'查看 '+nameOf(p)+' 详情');
+  title.title=title.textContent;
+  const h3=element('h3');h3.style.margin='0';h3.appendChild(title);info.appendChild(h3);
+  const extra=element('div','card-extra'),record=element('p','card-record-count',mediaCount(p));record.title=record.textContent;
+  const components=element('div','components');addComponents(components,p);extra.append(record,components);info.appendChild(extra);card.appendChild(info);
+  return card;
+}
+function renderGallery(){
+  const grid=$('grid');grid.replaceChildren();
+  [['starred','收藏'],['complete','可取用'],['pending','待补']].forEach(([bucket,title])=>{
+    const members=filtered.filter(p=>bucketOf(p)===bucket);if(!members.length)return;
+    const section=element('section','source-section');section.dataset.bucket=bucket;
+    const heading=element('div','section-title');heading.append(element('h2','',title),element('span','',members.length+' 组'));
+    const cards=element('div','gallery-grid');members.forEach(p=>cards.appendChild(makeCard(p)));
+    section.append(heading,cards);grid.appendChild(section);
+  });
+}
+function render(){
+  const query=search.value.trim().toLowerCase();
+  filtered=entries.filter(p=>(!selectedCategories.size||selectedCategories.has(categoryOf(p)))&&(!sourceFilter.value||p.source===sourceFilter.value)&&(!statusFilter.value||isComplete(p)===(statusFilter.value==='complete'))&&(p.command+' '+(p.moodboard||'')).toLowerCase().includes(query));
+  filtered.sort((a,b)=>({starred:0,complete:1,pending:2}[bucketOf(a)]-{starred:0,complete:1,pending:2}[bucketOf(b)])||(['mine','collected','unclassified'].indexOf(a.source)-['mine','collected','unclassified'].indexOf(b.source))||Number(b.kind==='combination')-Number(a.kind==='combination'));
+  $('count').textContent=filtered.length+' / '+entries.length+' 组';
+  $('category-label').textContent=selectedCategories.size?selectedCategories.size===1?[...selectedCategories][0]:'已选 '+selectedCategories.size+' 类':'全部风格';
+  $('empty').hidden=filtered.length!==0;
+  renderGallery();
+  if(active){if(!filtered.includes(active)){active=filtered[0]||active;activeImage=0}$('bench-content').hidden=!filtered.length;renderBench()}
+}
+function resetFilters(){selectedCategories.clear();search.value='';sourceFilter.value='';statusFilter.value='';document.querySelectorAll('#category-menu input').forEach(i=>i.checked=false);render()}
+function initCategories(){
+  const counts=new Map();entries.forEach(p=>counts.set(categoryOf(p),(counts.get(categoryOf(p))||0)+1));
+  const order=['3DCG','游戏CG','写实仿真','浓彩手绘','中世纪','真人摄影','水墨与黑白手绘'];
+  [...counts.keys()].sort((a,b)=>{const ia=order.indexOf(a),ib=order.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib)||a.localeCompare(b,'zh-CN')}).forEach(category=>{
+    const label=element('label'),input=element('input');input.type='checkbox';input.value=category;
+    input.addEventListener('change',()=>{input.checked?selectedCategories.add(category):selectedCategories.delete(category);render()});
+    label.append(input,document.createTextNode(category),element('span','category-count',String(counts.get(category))));$('category-menu').appendChild(label);
+  });
+  $('category-menu').appendChild(button('text-button','清除大类选择',()=>{selectedCategories.clear();document.querySelectorAll('#category-menu input').forEach(i=>i.checked=false);render()}));
+  if(!entries.some(p=>p.source==='unclassified'))sourceFilter.querySelector('[value="unclassified"]').remove();
+}
+function openBench(p,image=0){
+  if(!active){returnScroll=window.scrollY;returnKey=starKey(p)}
+  active=p;activeImage=image;document.body.dataset.view='bench';$('gallery').hidden=true;$('workbench').hidden=false;renderBench();window.scrollTo({top:0,behavior:'instant'});$('focus-name').focus({preventScroll:true});
+}
+function returnToGallery(){
+  active=null;document.body.dataset.view='gallery';$('workbench').hidden=true;$('gallery').hidden=false;$('empty').hidden=filtered.length!==0;
+  requestAnimationFrame(()=>{window.scrollTo({top:returnScroll,behavior:'instant'});const card=[...document.querySelectorAll('.style-card')].find(c=>c.dataset.key===returnKey);card?.querySelector('.card-name')?.focus({preventScroll:true})});
+}
+function stepProfile(amount){if(!active||!filtered.length)return;const i=filtered.indexOf(active);active=filtered[(i+amount+filtered.length)%filtered.length];activeImage=0;renderBench()}
+function renderFocusMedia(){
+  if(!active)return;renderMedia($('focus-media'),active,true);
+  [...$('focus-thumbs').children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===activeImage)));
+}
+function renderBench(){
+  if(!active)return;
+  const p=active,media=mediaFor(p);
+  $('profile-position').textContent=filtered.length?(filtered.indexOf(p)+1)+' / '+filtered.length:'0 / 0';
+  $('previous-profile').disabled=$('next-profile').disabled=filtered.length<2;
+  if(!filtered.length)return;
+  activeImage=Math.min(Math.max(0,activeImage),Math.max(0,media.length-1));renderFocusMedia();
+  $('focus-source').textContent=SOURCE_NAMES[p.source];$('focus-count').textContent=mediaCount(p);syncStar($('focus-star'),p);
+  $('focus-category').textContent=categoryOf(p);$('focus-name').textContent=p.moodboard||(p.kind==='combination'?'推荐组合':'风格效果');
+  const code=$('focus-code');code.textContent=p.command?short(p.command):'P值待提供';code.classList.toggle('pending-code',!p.command);
+  $('focus-copy').disabled=!p.command;$('focus-copy').querySelector('span').textContent=p.command?(p.kind==='combination'?'一起复制完整参数':'复制完整参数'):'P值待提供';
+  addComponents($('focus-components'),p);
+  const desc=$('focus-description');desc.textContent=p.styleEffect||'风格说明待补充';desc.classList.remove('expanded');
+  $('description-toggle').textContent='展开风格说明';$('description-toggle').setAttribute('aria-expanded','false');
+  $('focus-note').textContent=!p.command?'此组已保留情绪板参考，收到P值后可在原条目补入。':!p.images.length?'此组暂无效果图；参数按原文保留。':'';
+  $('focus-note').hidden=!$('focus-note').textContent;
+  const thumbs=$('focus-thumbs');thumbs.replaceChildren();thumbs.hidden=media.length<2;
+  media.forEach((m,i)=>{const b=button('thumb',undefined,()=>{activeImage=i;renderFocusMedia()},'查看 '+mediaLabel(m));b.setAttribute('aria-pressed',String(i===activeImage));b.append(makeImage(m.src,''),element('span','',m.kind==='效果图'?'效果 '+m.position:'参考'));thumbs.appendChild(b)});
+  const choices=$('choice-row');choices.replaceChildren();const position=filtered.indexOf(p),next=[];
+  for(let i=1;i<=Math.min(3,filtered.length-1);i++)next.push(filtered[(position+i)%filtered.length]);
+  choices.style.setProperty('--choices',Math.max(1,next.length));$('other-styles').hidden=!next.length;
+  next.forEach(item=>{
+    const card=element('article','choice'),pick=button('choice-pick',undefined,()=>{active=item;activeImage=0;renderBench()},'查看 '+nameOf(item));
+    const first=mediaFor(item)[0];pick.append(first?makeImage(first.src,''):element('span','choice-placeholder',''),element('span','choice-name',item.moodboard||(item.kind==='combination'?'推荐组合':categoryOf(item))),element('code','choice-code',item.command?short(item.command):'P值待提供'));
+    const copy=button('copy','复制',event=>copyProfile(item,event.currentTarget),'复制 '+(item.command||nameOf(item)));copy.disabled=!item.command;card.append(pick,copy);choices.appendChild(card);
+  });requestAnimationFrame(syncDescription);
+}
+function syncDescription(){const p=$('focus-description'),b=$('description-toggle');if(!active||$('workbench').hidden)return;b.hidden=!p.classList.contains('expanded')&&p.scrollHeight<=p.clientHeight+1}
+function openImage(p,index){
+  viewerProfile=p;viewerIndex=index;renderImage();if(!viewer.open)viewer.showModal();document.body.style.overflow='hidden';
+}
+function renderImage(){
+  if(!viewerProfile)return;const all=mediaFor(viewerProfile),m=all[viewerIndex],image=$('full-image');
+  image.src=m.src;image.alt=nameOf(viewerProfile)+' '+mediaLabel(m);
+  $('viewer-code').textContent=viewerProfile.command?short(viewerProfile.command):'P值待提供';
+  $('viewer-kind').textContent=m.kind;$('viewer-copy').disabled=!viewerProfile.command;
+  $('viewer-position').textContent=mediaLabel(m)+' · 全组 '+(viewerIndex+1)+' / '+all.length;
+  $('viewer-prev').hidden=$('viewer-next').hidden=all.length<2;
+}
+function stepImage(amount){if(!viewerProfile)return;const length=mediaFor(viewerProfile).length;viewerIndex=(viewerIndex+amount+length)%length;renderImage()}
+document.querySelectorAll('[data-prompt]').forEach(b=>b.addEventListener('click',()=>copyText($(b.dataset.prompt).textContent,b,'测试提示词')));
+const densitySelect=$('density-select');densitySelect.value=document.documentElement.dataset.density||'compact';
+densitySelect.addEventListener('change',()=>{document.documentElement.dataset.density=densitySelect.value;try{localStorage.setItem('mj-p-gallery-density-v1',densitySelect.value)}catch{notify('浏览密度仅在本次浏览保留')}});
+search.addEventListener('input',render);sourceFilter.addEventListener('change',render);statusFilter.addEventListener('change',render);
+$('reset-filters').addEventListener('click',resetFilters);$('empty-reset').addEventListener('click',resetFilters);
+$('back-to-gallery').addEventListener('click',returnToGallery);$('previous-profile').addEventListener('click',()=>stepProfile(-1));$('next-profile').addEventListener('click',()=>stepProfile(1));
+$('focus-star').addEventListener('click',()=>{if(active)toggleStar(active)});$('focus-copy').addEventListener('click',event=>{if(active)copyProfile(active,event.currentTarget)});
+$('description-toggle').addEventListener('click',()=>{const p=$('focus-description'),open=p.classList.toggle('expanded');$('description-toggle').setAttribute('aria-expanded',String(open));$('description-toggle').textContent=open?'收起风格说明':'展开风格说明'});
+$('viewer-prev').addEventListener('click',()=>stepImage(-1));$('viewer-next').addEventListener('click',()=>stepImage(1));$('viewer-close').addEventListener('click',()=>viewer.close());
+$('viewer-copy').addEventListener('click',event=>{if(viewerProfile)copyProfile(viewerProfile,event.currentTarget)});
+$('viewer-retry').addEventListener('click',renderImage);
+viewer.addEventListener('close',()=>{if(active&&viewerProfile===active){activeImage=viewerIndex;renderFocusMedia()}viewerProfile=null;document.body.style.overflow=''});
+viewer.addEventListener('click',event=>{if(event.target!==viewer)return;const r=viewer.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)viewer.close()});
+$('full-image').addEventListener('error',()=>notify('图片未能读取，可点击“重新读取图片”重试'));
+$('copy-close').addEventListener('click',()=>$('copy-dialog').close());
+document.addEventListener('keydown',event=>{
+  if($('copy-dialog').open)return;
+  if(viewer.open&&(event.key==='ArrowRight'||event.key==='ArrowLeft')){event.preventDefault();stepImage(event.key==='ArrowRight'?1:-1)}
+  if(event.key==='Escape'){['category-details','prompt-details'].forEach(id=>$(id).open=false)}
+});
+document.addEventListener('click',event=>{['category-details','prompt-details'].forEach(id=>{const d=$(id);if(d.open&&!d.contains(event.target))d.open=false})});
+window.addEventListener('storage',event=>{
+  if(event.key==='mj-p-gallery-density-v1'){const value=event.newValue==='comfortable'?'comfortable':'compact';document.documentElement.dataset.density=value;densitySelect.value=value}
+  if(event.key===THEME_STORAGE_KEY){document.documentElement.dataset.theme=event.newValue==='dark'?'dark':'light';syncTheme()}
+  if(event.key===STAR_STORAGE_KEY){try{const value=JSON.parse(event.newValue||'[]');if(Array.isArray(value)){starred=new Set(value.filter(x=>typeof x==='string'));render();if(active)syncStar($('focus-star'),active)}}catch{}}
+});
+if(typeof ResizeObserver!=='undefined')new ResizeObserver(syncDescription).observe($('focus-description'));
+$('library-note').textContent=profiles.filter(p=>p.kind!=='combination').length+' 个P值 · '+profiles.filter(p=>p.kind==='combination').length+' 个组合 · '+drafts.length+' 个待补代码；'+entries.filter(isComplete).length+' 组可取用';
+syncTheme();initCategories();render();
+</script>
+</body>
+</html>
